@@ -6,23 +6,19 @@ const useDirection = () => {
   const direction = ref(Direction.RIGHT);
 
   onKeyStroke(['w', 'W', 'ArrowUp'], () => {
-    if (lastInputDirection.value != Direction.BOTTOM)
-      lastInputDirection.value = 'top';
+    if (direction.value != Direction.BOTTOM) direction.value = 'top';
   });
 
   onKeyStroke(['s', 'S', 'ArrowDown'], () => {
-    if (lastInputDirection.value != Direction.TOP)
-      lastInputDirection.value = 'bottom';
+    if (direction.value != Direction.TOP) direction.value = 'bottom';
   });
 
   onKeyStroke(['a', 'A', 'ArrowLeft'], () => {
-    if (lastInputDirection.value != Direction.RIGHT)
-      lastInputDirection.value = 'left';
+    if (direction.value != Direction.RIGHT) direction.value = 'left';
   });
 
   onKeyStroke(['d', 'D', 'ArrowRight'], () => {
-    if (lastInputDirection.value != Direction.LEFT)
-      lastInputDirection.value = 'right';
+    if (direction.value != Direction.LEFT) direction.value = 'right';
   });
 
   return { direction };

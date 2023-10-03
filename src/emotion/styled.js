@@ -181,7 +181,7 @@ const render = (component) => (renderStyle) => (props, children) => {
   return h(
     component,
     { ...props, class: renderStyle({ ...props, theme }) },
-    children?.slots
+    children?.slots,
   );
 };
 

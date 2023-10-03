@@ -57,6 +57,6 @@ const StyledSnakeChunk = styled.span(
     position: absolute;
     top: ${top};
     left: ${left};
-  `
+  `,
 );
 </script>

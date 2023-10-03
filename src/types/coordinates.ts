@@ -1,4 +1,4 @@
-export type SnakeChunk = {
+export type Point = {
   top: number;
   left: number;
 };

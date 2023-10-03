@@ -23,7 +23,7 @@ import {
 const level = ref(1);
 
 const { direction: lastInputDirection } = useDirection();
-const { snakeChunk: head, topInPx, leftInPx, move } = useMovable();
+const { point: head, topInPx, leftInPx, move } = useMovable();
 const gameLoop = ref<Nullable<ReturnType<typeof setInterval>>>(null);
 
 const start = () => {

@@ -1,25 +1,25 @@
 import { computed, reactive } from 'vue';
-import { SnakeChunk } from '@/types/snake';
+import { Point } from '@/types/coordinates';
 import { Direction, Directions } from '@/types/direction';
 import { STEP_INCREMENT } from '@/constants/game-rules';
 
 const useMovable = (initTop: number = 0, initLeft: number = 0) => {
-  const snakeChunk = reactive<SnakeChunk>({ top: initTop, left: initLeft });
+  const point = reactive<Point>({ top: initTop, left: initLeft });
 
-  const topInPx = computed(() => `${snakeChunk.top}px`);
-  const leftInPx = computed(() => `${snakeChunk.left}px`);
+  const topInPx = computed(() => `${point.top}px`);
+  const leftInPx = computed(() => `${point.left}px`);
 
-  const move = (snakeChunk: SnakeChunk, direction: Direction) => {
+  const move = (point: Point, direction: Direction) => {
     const moveAction = {
-      [Directions.TOP]: () => (snakeChunk.top -= STEP_INCREMENT),
-      [Directions.BOTTOM]: () => (snakeChunk.top += STEP_INCREMENT),
-      [Directions.LEFT]: () => (snakeChunk.left -= STEP_INCREMENT),
-      [Directions.RIGHT]: () => (snakeChunk.left += STEP_INCREMENT),
+      [Directions.TOP]: () => (point.top -= STEP_INCREMENT),
+      [Directions.BOTTOM]: () => (point.top += STEP_INCREMENT),
+      [Directions.LEFT]: () => (point.left -= STEP_INCREMENT),
+      [Directions.RIGHT]: () => (point.left += STEP_INCREMENT),
     };
     moveAction[direction]();
   };
 
-  return { snakeChunk, move, topInPx, leftInPx };
+  return { point, move, topInPx, leftInPx };
 };
 
 export default useMovable;

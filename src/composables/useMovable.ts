@@ -3,8 +3,8 @@ import { SnakeChunk } from '@/types/snake';
 import { Direction, Directions } from '@/types/direction';
 import { STEP_INCREMENT } from '@/constants/game-rules';
 
-const useMovable = () => {
-  const snakeChunk = reactive<SnakeChunk>({ top: 0, left: 0 });
+const useMovable = (initTop: number = 0, initLeft: number = 0) => {
+  const snakeChunk = reactive<SnakeChunk>({ top: initTop, left: initLeft });
 
   const topInPx = computed(() => `${snakeChunk.top}px`);
   const leftInPx = computed(() => `${snakeChunk.left}px`);

@@ -8,6 +8,7 @@ import styled, { css, BaseProps } from '@/plugins/emotion';
 import { useDirection } from '@/composables';
 import { Nullable } from '@/types/utils';
 import { Directions } from '@/types/direction';
+import { MOVEMENT_SPEED } from '@/constants/game-rules';
 
 const level = ref(1);
 
@@ -41,7 +42,7 @@ onMounted(() => {
       default:
         break;
     }
-  }, 250);
+  }, MOVEMENT_SPEED);
 });
 
 onBeforeUnmount(() => {
@@ -66,4 +67,3 @@ const StyledSnakeChunk = styled.span(
   `,
 );
 </script>
-@/types/direction

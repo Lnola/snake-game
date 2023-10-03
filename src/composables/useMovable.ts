@@ -1,13 +1,10 @@
-import { computed, reactive } from 'vue';
 import { Point } from '@/types/coordinates';
 import { Direction, Directions } from '@/types/direction';
 import { STEP_INCREMENT } from '@/constants/game-rules';
+import { usePoint } from '.';
 
 const useMovable = (initTop: number = 0, initLeft: number = 0) => {
-  const point = reactive<Point>({ top: initTop, left: initLeft });
-
-  const topInPx = computed(() => `${point.top}px`);
-  const leftInPx = computed(() => `${point.left}px`);
+  const point = usePoint(initTop, initLeft);
 
   const move = (point: Point, direction: Direction) => {
     const moveAction = {
@@ -19,7 +16,7 @@ const useMovable = (initTop: number = 0, initLeft: number = 0) => {
     moveAction[direction]();
   };
 
-  return { point, move, topInPx, leftInPx };
+  return { ...point, move };
 };
 
 export default useMovable;

@@ -5,6 +5,7 @@
       :top="topInPx"
       :left="leftInPx"
     />
+    <StyledApple />
   </StyledGameBox>
 </template>
 
@@ -74,6 +75,19 @@ const StyledSnakeChunk = styled.span(
     width: 20px;
     height: 20px;
     background-color: greenyellow;
+    position: absolute;
+    top: ${top};
+    left: ${left};
+  `,
+);
+
+type StyledApple = BaseProps & { top: string; left: string };
+const StyledApple = styled.span(
+  ({ top, left }: StyledSnakeChunk) => css`
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-color: red;
     position: absolute;
     top: ${top};
     left: ${left};

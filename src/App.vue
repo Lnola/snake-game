@@ -41,7 +41,10 @@ const { point: head, topInPx, leftInPx, move } = useMovable();
 const gameLoop = ref<Nullable<ReturnType<typeof setInterval>>>(null);
 
 const showApple = () => {
-  placeApple(random(0, PLAYABLE_WIDTH), random(0, PLAYABLE_HEIGHT));
+  placeApple(
+    random(0, PLAYABLE_WIDTH / 10) * 10,
+    random(0, PLAYABLE_HEIGHT / 10) * 10,
+  );
 };
 
 const start = () => {

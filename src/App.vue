@@ -35,7 +35,7 @@ const {
   isVisible: isAppleVisible,
   topInPx: appleTopInPx,
   leftInPx: appleLeftInPx,
-  hide: hideApple,
+  remove: removeApple,
   place: placeApple,
 } = usePoint();
 const { direction: lastInputDirection } = useDirection();
@@ -63,7 +63,7 @@ const stop = () => {
 };
 
 const handleApplePickup = () => {
-  hideApple();
+  removeApple();
   setTimeout(() => {
     showApple();
   }, 2000);

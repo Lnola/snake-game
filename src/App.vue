@@ -31,9 +31,11 @@ import {
 const level = ref(1);
 
 const {
+  point: apple,
   isVisible: isAppleVisible,
   topInPx: appleTopInPx,
   leftInPx: appleLeftInPx,
+  hide: hideApple,
   place: placeApple,
 } = usePoint();
 const { direction: lastInputDirection } = useDirection();
@@ -50,6 +52,7 @@ const showApple = () => {
 const start = () => {
   gameLoop.value = setInterval(() => {
     if (isOutOfBounds.value) return handleLoss();
+    if (isApplePickedUp.value) handleApplePickup();
     move(head, lastInputDirection.value);
   }, MOVEMENT_SPEED);
 };
@@ -57,6 +60,13 @@ const start = () => {
 const stop = () => {
   if (!gameLoop.value) return;
   clearInterval(gameLoop.value);
+};
+
+const handleApplePickup = () => {
+  hideApple();
+  setTimeout(() => {
+    showApple();
+  }, 2000);
 };
 
 const handleLoss = () => {
@@ -68,6 +78,18 @@ const isOutOfBounds = computed(() => {
   const isOutOfBoundsVertical = head.top > PLAYABLE_HEIGHT || head.top < 0;
   const isOutOfBoundsHorizontal = head.left > PLAYABLE_WIDTH || head.left < 0;
   return isOutOfBoundsVertical || isOutOfBoundsHorizontal;
+});
+
+const isApplePickedUp = computed(() => {
+  const isTouchingFromAbove =
+    head.top + (2 / 3) * POINT_SIZE >= apple.top &&
+    head.top <= apple.top + (2 / 3) * POINT_SIZE;
+  const isApplePickedUpVertical = isTouchingFromAbove;
+  const isTouchingFromLeft =
+    head.left + (2 / 3) * POINT_SIZE >= apple.left &&
+    head.left <= apple.left + (2 / 3) * POINT_SIZE;
+  const isApplePickedUpHorizontal = isTouchingFromLeft;
+  return isApplePickedUpVertical && isApplePickedUpHorizontal;
 });
 
 onMounted(() => {

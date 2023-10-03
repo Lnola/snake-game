@@ -6,6 +6,7 @@
 import { computed, onBeforeUnmount, onMounted, reactive, ref } from 'vue';
 import { onKeyStroke } from '@vueuse/core';
 import styled, { css } from './emotion';
+import { Direction } from './constants/direction';
 
 const level = ref(1);
 
@@ -17,19 +18,23 @@ const top = computed(() => `${head.top}px`);
 const left = computed(() => `${head.left}px`);
 
 onKeyStroke(['w', 'W', 'ArrowUp'], () => {
-  lastInputDirection.value = 'top';
+  if (lastInputDirection.value != Direction.BOTTOM)
+    lastInputDirection.value = 'top';
 });
 
 onKeyStroke(['s', 'S', 'ArrowDown'], () => {
-  lastInputDirection.value = 'bottom';
+  if (lastInputDirection.value != Direction.TOP)
+    lastInputDirection.value = 'bottom';
 });
 
 onKeyStroke(['a', 'A', 'ArrowLeft'], () => {
-  lastInputDirection.value = 'left';
+  if (lastInputDirection.value != Direction.RIGHT)
+    lastInputDirection.value = 'left';
 });
 
 onKeyStroke(['d', 'D', 'ArrowRight'], () => {
-  lastInputDirection.value = 'right';
+  if (lastInputDirection.value != Direction.LEFT)
+    lastInputDirection.value = 'right';
 });
 
 onMounted(() => {

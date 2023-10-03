@@ -5,14 +5,19 @@
       :top="topInPx"
       :left="leftInPx"
     />
-    <StyledApple />
+    <StyledApple
+      v-if="isAppleVisible"
+      :top="appleTopInPx"
+      :left="appleLeftInPx"
+    />
   </StyledGameBox>
 </template>
 
 <script lang="ts" setup>
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
+import random from 'lodash/random';
 import styled, { css, BaseProps } from '@/plugins/emotion';
-import { useDirection, useMovable } from '@/composables';
+import { useDirection, useMovable, usePoint } from '@/composables';
 import { Nullable } from '@/types/utils';
 import {
   MOVEMENT_SPEED,
@@ -25,9 +30,19 @@ import {
 
 const level = ref(1);
 
+const {
+  isVisible: isAppleVisible,
+  topInPx: appleTopInPx,
+  leftInPx: appleLeftInPx,
+  place: placeApple,
+} = usePoint();
 const { direction: lastInputDirection } = useDirection();
 const { point: head, topInPx, leftInPx, move } = useMovable();
 const gameLoop = ref<Nullable<ReturnType<typeof setInterval>>>(null);
+
+const showApple = () => {
+  placeApple(random(0, PLAYABLE_WIDTH), random(0, PLAYABLE_HEIGHT));
+};
 
 const start = () => {
   gameLoop.value = setInterval(() => {
@@ -54,6 +69,7 @@ const isOutOfBounds = computed(() => {
 
 onMounted(() => {
   start();
+  showApple();
 });
 
 onBeforeUnmount(() => {

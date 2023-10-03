@@ -9,7 +9,7 @@
 </template>
 
 <script lang="ts" setup>
-import { onBeforeUnmount, onMounted, ref } from 'vue';
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
 import styled, { css, BaseProps } from '@/plugins/emotion';
 import { useDirection, useMovable } from '@/composables';
 import { Nullable } from '@/types/utils';
@@ -25,14 +25,35 @@ const { direction: lastInputDirection } = useDirection();
 const { snakeChunk: head, topInPx, leftInPx, move } = useMovable();
 const gameLoop = ref<Nullable<ReturnType<typeof setInterval>>>(null);
 
-onMounted(() => {
+const start = () => {
   gameLoop.value = setInterval(() => {
+    if (isOutOfBounds.value) return handleLoss();
     move(head, lastInputDirection.value);
   }, MOVEMENT_SPEED);
+};
+
+const stop = () => {
+  if (!gameLoop.value) return;
+  clearInterval(gameLoop.value);
+};
+
+const handleLoss = () => {
+  stop();
+  alert('You lost the game');
+};
+
+const isOutOfBounds = computed(() => {
+  const isOutOfBoundsVertical = head.top > GAME_BOX_WIDTH || head.top < 0;
+  const isOutOfBoundsHorizontal = head.left > GAME_BOX_HEIGHT || head.left < 0;
+  return isOutOfBoundsVertical || isOutOfBoundsHorizontal;
+});
+
+onMounted(() => {
+  start();
 });
 
 onBeforeUnmount(() => {
-  if (gameLoop.value) clearInterval(gameLoop.value);
+  stop();
 });
 </script>
 

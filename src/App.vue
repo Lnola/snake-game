@@ -4,38 +4,18 @@
 
 <script setup>
 import { computed, onBeforeUnmount, onMounted, reactive, ref } from 'vue';
-import { onKeyStroke } from '@vueuse/core';
-import styled, { css } from './emotion';
-import { Direction } from './constants/direction';
+import styled, { css } from '@/emotion';
+import { useDirection } from '@/composables';
 
 const level = ref(1);
 
+const { direction: lastInputDirection } = useDirection();
+
 const head = reactive({ top: 0, left: 0 });
-const lastInputDirection = ref('right');
 const gameLoop = ref(null);
 
 const top = computed(() => `${head.top}px`);
 const left = computed(() => `${head.left}px`);
-
-onKeyStroke(['w', 'W', 'ArrowUp'], () => {
-  if (lastInputDirection.value != Direction.BOTTOM)
-    lastInputDirection.value = 'top';
-});
-
-onKeyStroke(['s', 'S', 'ArrowDown'], () => {
-  if (lastInputDirection.value != Direction.TOP)
-    lastInputDirection.value = 'bottom';
-});
-
-onKeyStroke(['a', 'A', 'ArrowLeft'], () => {
-  if (lastInputDirection.value != Direction.RIGHT)
-    lastInputDirection.value = 'left';
-});
-
-onKeyStroke(['d', 'D', 'ArrowRight'], () => {
-  if (lastInputDirection.value != Direction.LEFT)
-    lastInputDirection.value = 'right';
-});
 
 onMounted(() => {
   gameLoop.value = setInterval(() => {

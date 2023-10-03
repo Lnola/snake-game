@@ -19,6 +19,8 @@ import {
   GAME_BOX_WIDTH,
   GAME_BOX_HEIGHT,
   POINT_SIZE,
+  PLAYABLE_WIDTH,
+  PLAYABLE_HEIGHT,
 } from '@/constants/game-rules';
 
 const level = ref(1);
@@ -45,8 +47,8 @@ const handleLoss = () => {
 };
 
 const isOutOfBounds = computed(() => {
-  const isOutOfBoundsVertical = head.top > GAME_BOX_HEIGHT || head.top < 0;
-  const isOutOfBoundsHorizontal = head.left > GAME_BOX_WIDTH || head.left < 0;
+  const isOutOfBoundsVertical = head.top > PLAYABLE_HEIGHT || head.top < 0;
+  const isOutOfBoundsHorizontal = head.left > PLAYABLE_WIDTH || head.left < 0;
   return isOutOfBoundsVertical || isOutOfBoundsHorizontal;
 });
 

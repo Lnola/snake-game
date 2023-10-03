@@ -63,7 +63,7 @@ const StyledGameBox = styled.div(
   () => css`
     width: ${GAME_BOX_WIDTH}px;
     height: ${GAME_BOX_HEIGHT}px;
-    background-color: red;
+    border: 20px solid black;
     position: relative;
   `,
 );

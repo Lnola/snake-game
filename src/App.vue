@@ -18,6 +18,7 @@ import {
   MOVEMENT_SPEED,
   GAME_BOX_WIDTH,
   GAME_BOX_HEIGHT,
+  POINT_SIZE,
 } from '@/constants/game-rules';
 
 const level = ref(1);
@@ -63,7 +64,7 @@ const StyledGameBox = styled.div(
   () => css`
     width: ${GAME_BOX_WIDTH}px;
     height: ${GAME_BOX_HEIGHT}px;
-    border: 20px solid black;
+    border: ${POINT_SIZE}px solid black;
     position: relative;
   `,
 );
@@ -72,8 +73,8 @@ type StyledSnakeChunk = BaseProps & { top: string; left: string };
 const StyledSnakeChunk = styled.span(
   ({ top, left }: StyledSnakeChunk) => css`
     display: inline-block;
-    width: 20px;
-    height: 20px;
+    width: ${POINT_SIZE}px;
+    height: ${POINT_SIZE}px;
     background-color: greenyellow;
     position: absolute;
     top: ${top};
@@ -85,8 +86,8 @@ type StyledApple = BaseProps & { top: string; left: string };
 const StyledApple = styled.span(
   ({ top, left }: StyledSnakeChunk) => css`
     display: inline-block;
-    width: 20px;
-    height: 20px;
+    width: ${POINT_SIZE}px;
+    height: ${POINT_SIZE}px;
     background-color: red;
     position: absolute;
     top: ${top};

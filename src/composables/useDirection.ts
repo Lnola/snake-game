@@ -1,24 +1,24 @@
 import { ref } from 'vue';
 import { onKeyStroke } from '@vueuse/core';
-import { Direction } from '@/constants/direction';
+import { Directions, type Direction } from '@/constants/direction';
 
 const useDirection = () => {
-  const direction = ref(Direction.RIGHT);
+  const direction = ref<Direction>(Directions.RIGHT);
 
   onKeyStroke(['w', 'W', 'ArrowUp'], () => {
-    if (direction.value != Direction.BOTTOM) direction.value = 'top';
+    if (direction.value != Directions.BOTTOM) direction.value = Directions.TOP;
   });
 
   onKeyStroke(['s', 'S', 'ArrowDown'], () => {
-    if (direction.value != Direction.TOP) direction.value = 'bottom';
+    if (direction.value != Directions.TOP) direction.value = Directions.BOTTOM;
   });
 
   onKeyStroke(['a', 'A', 'ArrowLeft'], () => {
-    if (direction.value != Direction.RIGHT) direction.value = 'left';
+    if (direction.value != Directions.RIGHT) direction.value = Directions.LEFT;
   });
 
   onKeyStroke(['d', 'D', 'ArrowRight'], () => {
-    if (direction.value != Direction.LEFT) direction.value = 'right';
+    if (direction.value != Directions.LEFT) direction.value = Directions.RIGHT;
   });
 
   return { direction };

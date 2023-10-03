@@ -1,35 +1,20 @@
 <template>
-  <StyledSnakeChunk v-for="_ in Array(level)" v-bind="{ top, left }" />
+  <StyledSnakeChunk v-for="_ in Array(level)" :top="topInPx" :left="leftInPx" />
 </template>
 
 <script lang="ts" setup>
-import { computed, onBeforeUnmount, onMounted, reactive, ref } from 'vue';
+import { onBeforeUnmount, onMounted, ref } from 'vue';
 import styled, { css, BaseProps } from '@/plugins/emotion';
-import { useDirection } from '@/composables';
+import { useDirection, useMovable } from '@/composables';
 import { Nullable } from '@/types/utils';
-import { Directions, Direction } from '@/types/direction';
-import { Node } from '@/types/node';
-import { MOVEMENT_SPEED, STEP_INCREMENT } from '@/constants/game-rules';
+import { MOVEMENT_SPEED } from '@/constants/game-rules';
 
 const level = ref(1);
 
 const { direction: lastInputDirection } = useDirection();
 
-const head = reactive<Node>({ top: 0, left: 0 });
+const { snakeChunk: head, topInPx, leftInPx, move } = useMovable();
 const gameLoop = ref<Nullable<ReturnType<typeof setInterval>>>(null);
-
-const top = computed(() => `${head.top}px`);
-const left = computed(() => `${head.left}px`);
-
-const move = (node: Node, direction: Direction) => {
-  const moveAction = {
-    [Directions.TOP]: () => (node.top -= STEP_INCREMENT),
-    [Directions.BOTTOM]: () => (node.top += STEP_INCREMENT),
-    [Directions.LEFT]: () => (node.left -= STEP_INCREMENT),
-    [Directions.RIGHT]: () => (node.left += STEP_INCREMENT),
-  };
-  moveAction[direction]();
-};
 
 onMounted(() => {
   gameLoop.value = setInterval(() => {

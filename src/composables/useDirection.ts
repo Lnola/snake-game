@@ -1,6 +1,6 @@
 import { ref } from 'vue';
 import { onKeyStroke } from '@vueuse/core';
-import { Directions, type Direction } from '@/constants/direction';
+import { Directions, type Direction } from '@/types/direction';
 
 const useDirection = () => {
   const direction = ref<Direction>(Directions.RIGHT);

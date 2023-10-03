@@ -7,7 +7,7 @@ import { computed, onBeforeUnmount, onMounted, reactive, ref } from 'vue';
 import styled, { css, BaseProps } from '@/plugins/emotion';
 import { useDirection } from '@/composables';
 import { Nullable } from '@/types/utils';
-import { Directions } from '@/constants/direction';
+import { Directions } from '@/types/direction';
 
 const level = ref(1);
 
@@ -66,3 +66,4 @@ const StyledSnakeChunk = styled.span(
   `,
 );
 </script>
+@/types/direction

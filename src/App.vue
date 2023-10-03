@@ -45,8 +45,8 @@ const handleLoss = () => {
 };
 
 const isOutOfBounds = computed(() => {
-  const isOutOfBoundsVertical = head.top > GAME_BOX_WIDTH || head.top < 0;
-  const isOutOfBoundsHorizontal = head.left > GAME_BOX_HEIGHT || head.left < 0;
+  const isOutOfBoundsVertical = head.top > GAME_BOX_HEIGHT || head.top < 0;
+  const isOutOfBoundsHorizontal = head.left > GAME_BOX_WIDTH || head.left < 0;
   return isOutOfBoundsVertical || isOutOfBoundsHorizontal;
 });
 

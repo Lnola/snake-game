@@ -9,6 +9,10 @@ const usePoint = (initTop: number = 0, initLeft: number = 0) => {
   const topInPx = computed(() => `${point.top}px`);
   const leftInPx = computed(() => `${point.left}px`);
 
+  const hide = () => {
+    isVisible.value = false;
+  };
+
   const place = (top: number = 0, left: number = 0) => {
     const isOutOfBoundsVertical = top < 0 || top > PLAYABLE_HEIGHT;
     const isOutOfBoundsHorizontal = left < 0 || left > PLAYABLE_WIDTH;
@@ -17,10 +21,10 @@ const usePoint = (initTop: number = 0, initLeft: number = 0) => {
 
     point.top = top;
     point.left = left;
-    isVisible.value = true;
+    hide();
   };
 
-  return { point, isVisible, topInPx, leftInPx, place };
+  return { point, isVisible, topInPx, leftInPx, hide, place };
 };
 
 export default usePoint;

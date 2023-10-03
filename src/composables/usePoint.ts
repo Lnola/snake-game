@@ -9,10 +9,6 @@ const usePoint = (initTop: number = 0, initLeft: number = 0) => {
   const topInPx = computed(() => `${point.top}px`);
   const leftInPx = computed(() => `${point.left}px`);
 
-  const show = () => {
-    isVisible.value = true;
-  };
-
   const hide = () => {
     isVisible.value = false;
     point.top = initTop;
@@ -27,11 +23,10 @@ const usePoint = (initTop: number = 0, initLeft: number = 0) => {
 
     point.top = top;
     point.left = left;
-
-    show();
+    isVisible.value = true;
   };
 
-  return { point, isVisible, topInPx, leftInPx, show, hide, place };
+  return { point, isVisible, topInPx, leftInPx, hide, place };
 };
 
 export default usePoint;

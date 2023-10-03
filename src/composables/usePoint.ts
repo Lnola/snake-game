@@ -15,6 +15,8 @@ const usePoint = (initTop: number = 0, initLeft: number = 0) => {
 
   const hide = () => {
     isVisible.value = false;
+    point.top = initTop;
+    point.left = initLeft;
   };
 
   const place = (top: number = 0, left: number = 0) => {
@@ -25,6 +27,7 @@ const usePoint = (initTop: number = 0, initLeft: number = 0) => {
 
     point.top = top;
     point.left = left;
+
     show();
   };
 

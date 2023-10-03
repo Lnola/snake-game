@@ -54,7 +54,7 @@ onMounted(() => {
       default:
         break;
     }
-  }, 750);
+  }, 250);
 });
 
 onBeforeUnmount(() => {

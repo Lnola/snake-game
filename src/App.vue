@@ -64,6 +64,8 @@ const stop = () => {
 
 const handleApplePickup = () => {
   removeApple();
+  level.value++;
+
   setTimeout(() => {
     showApple();
   }, 2000);
